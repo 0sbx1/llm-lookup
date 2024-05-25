@@ -4,27 +4,6 @@ import openai
 from credentials import openai_api_key
 import tqdm
 
-
-## test zone
-
-# Read the first CSV file
-df1 = pd.read_csv('/Users/mkarreth/Downloads/comp.csv')
-
-# Read the second CSV file
-df2 = pd.read_csv('/Users/mkarreth/Downloads/prod.csv')
-
-# Set up OpenAI API credentials
-openai.api_key = openai_api_key
-
-companies = df1
-website_products = df2
-
-join1 = 'Company'
-join2 = 'Website'
-
-## actual function
-
-
 def lookup(df1, df2, join1, join2, matching_context="",openai_model='gpt-3.5-turbo',temperature=0.1, chunk_size=20, return_stats=False):
     cache = {}
     cache_count = 0
@@ -62,11 +41,9 @@ def lookup(df1, df2, join1, join2, matching_context="",openai_model='gpt-3.5-tur
                     cache[df1_value] = generated_text
             
             temp_df.loc[index, join2] = generated_text
-        #temp_df.drop_duplicates(inplace=True)
         progress_bar.update()
     
     progress_bar.close()
-    #dfm = pd.merge(df1, temp_df, on=join1, how='left')
     dfm = pd.merge(temp_df, df2, on=join2, how='left')
 
     stats = {
