@@ -1,3 +1,4 @@
+# V0.0.2
 
 import pandas as pd
 import openai

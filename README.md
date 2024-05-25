@@ -1,22 +1,9 @@
-# llmLookup
+# llmlookup
 
-## Excel's vLookup, but powered by LLMs
-It's just the good old Excel VLOOKUP, but powered by LLMs. Specifically ever wondered about that approximate match functionality in a VLOOKUP? Well here we go for real.
+## Excel's vlookup, but powered by LLMs
+Ever wondered about that approximate match functionality in a vlookup? Well here we go for real. It's just the good old Excel vlookup, but powered by LLMs.
 
-## Technical details
-This code defines a function called `lookup` that performs a lookup operation between two pandas DataFrames (`df1` and `df2`). The function takes several parameters including the column names to join on (`join1` and `join2`), an optional matching context, the OpenAI model to use for text generation, and other optional parameters.
-
-The function starts by initializing a cache dictionary to store previously generated values and some counters to keep track of API calls and cache hits. It then prepares the values from `df2` by extracting the values from the specified join column (`join2`) and splitting them into chunks of a specified size.
-
-Next, the function iterates over each chunk of `df2` values and each row of `df1`. For each row, it checks if the value in the join column (`join1`) is already in the cache. If it is, the corresponding generated text is retrieved from the cache. Otherwise, an API call is made to the OpenAI chat completions API to generate the text.
-
-The prompt for the API call is constructed based on the provided matching context (if any) and the current value from `df1` and the chunk of `df2` values. The generated text is then extracted from the API response and stored in the cache if it is not "N/A".
-
-After all iterations, the function merges the modified `df1` with `df2` based on the join column (`join2`) using the `pd.merge` function.
-
-Finally, the function returns the merged DataFrame (`dfm`) and optionally, some statistics including the number of API calls, cache hits, and the number of chunks processed.
-
-## Function calling
+## Calling the lookup function
 
 Call the function as follows:
 
@@ -37,3 +24,13 @@ result = lookup(
 ```
 
 The optional parameters allow you to adjust the lookup for more tailored needs. You can choose the additional context, model, temperature, chunk size and whether or not to return stats on the lookup calls. The model, temperature and chunk size are an interplay that strongly depend on one another and the dataset given. Worth testing on a smaller data set and finetuning to see what works best for needs.
+
+## Technical details (V0.0.2)
+
+The function performs a lookup operation between two pandas dataframes (`df1` and `df2`). The function takes several parameters including the column names to join on (`join1` and `join2`), an optional matching context, the OpenAI model to use for text generation, and other optional parameters.
+
+The function then chunks the `df2` dataframe based on the passed chunk size parameter. This ensures the OpenAI calls meet context window limits but also ensures accuracy of the results. Subsequently, the function iterates over each chunk and each row of `df1`. For each row, it checks if the value in the join column (`join1`) is already in the cache. If it is, the corresponding generated text is retrieved from the cache. Otherwise, an API call is made to the OpenAI chat completions API to generate the text. This ensures both that the results are consistent over the function processing but also saves time/money by calling the API less often.
+
+In terms of the OpenAI API call, it's a simple prompt call. Provides the optional matching context and the current value from `df1` and the chunk of `df2` values. The generated text is then extracted from the API response and stored in the cache if it is not "N/A". The prompt is written to return only the value passed or "N/A."
+
+After all iterations, the function merges the modified `df1` with `df2` based on the join column (`join2`). This essentially returns the expected vlookup result. This result is being returned. Optionally, some statistics including the number of API calls, cache hits, and the number of chunks processed.
