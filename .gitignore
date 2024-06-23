@@ -2,4 +2,3 @@ credentials.py
 .env
 filepaths.py
 llm_lookup.code-workspace
-.gitignore
