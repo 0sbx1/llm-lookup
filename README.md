@@ -3,6 +3,12 @@
 ## Excel's vlookup, but powered by LLMs
 Ever wondered about that approximate match functionality in a vlookup? Well here we go for real. It's just the good old Excel vlookup, but powered by LLMs.
 
+## Demo
+
+See the [Jupyter notebook](llm-lookup.ipynb)for a walkthrough. Alternatively, also a video on YouTube:
+
+[![YouTube Demo for LLM Lookup](youtube_demo.png)](https://www.youtube.com/watch?v=CCQM-UvqlY0&t=13s)
+
 ## Calling the lookup function
 
 Call the function as follows:
