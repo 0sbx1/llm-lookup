@@ -2,3 +2,4 @@ credentials.py
 .env
 filepaths.py
 llm_lookup.code-workspace
+/__pycache__/
