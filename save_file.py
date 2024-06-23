@@ -1,6 +1,8 @@
 import os
 import pandas as pd
 
+# Simple function to save a new csv file without overwriting (by iterating and appending a number at end)
+
 def save_new_csv(file_path, merged_df):
     base_path = os.path.splitext(file_path)[0]
     counter = 1

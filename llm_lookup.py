@@ -1,11 +1,14 @@
-# V0.0.2
+# V0.0.3
 
 import pandas as pd
 import openai
-from credentials import openai_api_key
 import tqdm
+import os
 
 def lookup(df1, df2, join1, join2, matching_context="",openai_model='gpt-3.5-turbo',temperature=0.1, chunk_size=20, return_stats=False):
+    
+    openai.api_key = os.environ.get('OPENAI_API_KEY')
+
     cache = {}
     cache_count = 0
     api_calls = 0
@@ -28,7 +31,8 @@ def lookup(df1, df2, join1, join2, matching_context="",openai_model='gpt-3.5-tur
                     prompt = f"Using the best of your knowledge and precise data analysis skills, for the value \"{df1_value}\" of column \"{join1}\", please choose the most appropriate value from the list from column \"{join2}\" below. Return only the exact value as given with no additional text. Important, if you do not see a fitting result, return N/A. Values are: {chunk}"
                 else:
                     prompt = f"{matching_context}. Using the best of your knowledge and precise data analysis skills, for the value \"{df1_value}\" of column \"{join1}\", please choose the most appropriate value from the list from column \"{join2}\" below. Return only the exact value as given with no additional text. Important, if you do not see a fitting result, return N/A. Values are: {chunk}"
-                    response = openai.chat.completions.create(
+                
+                response = openai.chat.completions.create(
                     model=openai_model,
                     messages=[
                         {"role": "user",
