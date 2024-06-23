@@ -30,7 +30,11 @@ The optional parameters allow you to adjust the lookup for more tailored needs. 
 
 To use the lookup function, follow these steps:
 
-1. **Update API keys**: Make sure you have the OpenAI API key set as an environment variable `OPENAI_API_KEY`. You can do this by running `export OPENAI_API_KEY="your_api_key"` in your terminal to test. Otherwise modify the code as needed.
+1. **Update API keys**: Make sure you have the OpenAI API key set as an environment variable `OPENAI_API_KEY`. Test this by running the below in your Terminal, otherwise modify the code as need be:
+```python
+export OPENAI_API_KEY="your_api_key"
+```
 2. **Read files into Pandas dataframes**: Use Pandas to read files into a dataframe. The Pandas dataframes are being used to process the lookup. You can use the following function to read a CSV:
 ```python
-dataframe = pd.read_csv(file_path)```
+dataframe = pd.read_csv(file_path)
+```
