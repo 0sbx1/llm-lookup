@@ -7,7 +7,7 @@ Ever wondered about that approximate match functionality in a vlookup? Well here
 
 See the [Jupyter notebook](llm-lookup.ipynb) for a walkthrough. Alternatively, also a video on YouTube:
 
-[![YouTube Demo for LLM Lookup](youtube_demo.png)](https://www.youtube.com/watch?v=CCQM-UvqlY0&t=13s)
+[![YouTube Demo for LLM Lookup](youtube_demo.png)](https://youtu.be/7RmoPeYvNGI)
 
 ## Calling the lookup function
 
